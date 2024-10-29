@@ -14,20 +14,51 @@
   --content-width-large: 2560px;
 
   --content-sides-space-default: 40px;
-  --content-sides-space-small: calc(var(--content-sides-space-default) / 2);
+  /* --content-sides-space-small: calc(var(--content-sides-space-default) / 2); */
+
+  --space-ratio: 1.5;
+  --space-xx-small: calc(var(--space-x-small) / var(--space-ratio));
+  --space-x-small: calc(var(--space-small) / var(--space-ratio));
+  --space-small: calc(var(--space-smaller) / var(--space-ratio));
+  --space-smaller: calc(var(--space-initial) / var(--space-ratio));
+  --space-initial: 1.0rem;
+  --space-larger: calc(var(--space-initial) * var(--space-ratio));
+  --space-large: calc(var(--space-larger) * var(--space-ratio));
+  --space-x-large: calc(var(--space-large) * var(--space-ratio));
+  --space-xx-large: calc(var(--space-x-large) * var(--space-ratio));
 
   --sections-space-default: 50px;
-  --sections-space-large: calc(var(--sections-space-small) * 2);
+  --sections-space-large: calc(var(--sections-space-default) * 2);
 
-  --sentence-space-small: 0.5rem;
-  --sentence-space-large: calc(var(--sentence-space-small) * 3);
+  --sentence-space-initial: 0.5rem;
+  --sentence-space-large: calc(var(--sentence-space-initial) * 3);
 
-  --font-size-default: 16px;
+  --font-size-ratio: 1.5;
+  --font-size-xx-small: calc(var(--font-size-x-small) / var(--font-size-ratio));
+  --font-size-x-small: calc(var(--font-size-small) / var(--font-size-ratio));
+  --font-size-small: calc(var(--font-size-smaller) / var(--font-size-ratio));
+  --font-size-smaller: calc(var(--font-size-initial) / var(--font-size-ratio));
+  --font-size-initial: 16px;
+  --font-size-larger: calc(var(--font-size-initial) * var(--font-size-ratio));
+  --font-size-large: calc(var(--font-size-laeger) * var(--font-size-ratio));
+  --font-size-x-large: calc(var(--font-size-large) * var(--font-size-ratio));
+  --font-size-xx-large: calc(var(--font-size-x-large) * var(--font-size-ratio));
+}
 
+@media screen and (max-width: 767px) {
+  :root {
+    --content-sides-space-default: 20px;
+    --font-size-default: 14px;
+  }
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+html, body, header, div, span, h1, h2, h3, h4, h5, h6, p, a, img, ul, li, article, section, aside, figure, figcaption, footer {
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -39,14 +70,35 @@ html {
 body {
   color: var(--bg-color-dark-primary);
   font-family: Inter,"Noto Sans JP",sans-serif;
-  font-size: var(--font-size-default);
+  font-size: var(--font-size-initial);
   line-height: 1.6;
   letter-spacing: .1em;
 }
 
-@media screen and (max-width: 767px) {
-  :root {
-    --content-sides-space-default: 20px;
-    --font-size-default: 14px;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-weight: unset;
 }
+
+ol, ul {
+  list-style: none;
+}
+
+.stack > * {
+  margin-block: 0;
+}
+.stack:only-child {
+  block-size: 100%;
+}
+.stack > * + * {
+  margin-block-start: var(--space-initial);
+}
+.stack.exception-small > * + * {
+  margin-block-start: var(--space-small);
+}
+.stack-child-exception-large, .stack-child-exception-large + * {
+  --space: var(--space-large);
+}
+.stack.recursion * + * {
+  margin-block-start: var(--space-initial);
+}
+
