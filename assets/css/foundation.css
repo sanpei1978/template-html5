@@ -1,5 +1,6 @@
 :root {
   --bg-color-light-primary: #ffffff;
+  --bg-color-light-secondary: #fffefd;
   --bg-color-dark-primary: #3b4043;
 
   --text-color-light-primary: var(--bg-color-light-primary);
@@ -7,6 +8,7 @@
 
   --border-color-light-primary: var(--text-color-light-primary);
   --border-color-dark-primary: var(--text-color-dark-primary);
+  --border-color-dark-secondary: #dfdaae;
 
   --header-height: 72px;
   
@@ -40,7 +42,7 @@
   --font-size-smaller: calc(var(--font-size-initial) / var(--font-size-ratio));
   --font-size-initial: 16px;
   --font-size-larger: calc(var(--font-size-initial) * var(--font-size-ratio));
-  --font-size-large: calc(var(--font-size-laeger) * var(--font-size-ratio));
+  --font-size-large: calc(var(--font-size-larger) * var(--font-size-ratio));
   --font-size-x-large: calc(var(--font-size-large) * var(--font-size-ratio));
   --font-size-xx-large: calc(var(--font-size-x-large) * var(--font-size-ratio));
 }
@@ -50,13 +52,21 @@
     --content-sides-space-default: 20px;
     --font-size-default: 14px;
   }
+  #menu_secondary {
+    display: block;
+  }
+}
+@media screen and (min-width: 768px) {
+  #menu_secondary {
+    display: none;
+  }
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
-html, body, header, div, span, h1, h2, h3, h4, h5, h6, p, a, img, ul, li, article, section, aside, figure, figcaption, footer {
+html, body, header, main, div, span, h1, h2, h3, h4, h5, h6, p, a, img, ul, li, article, section, aside, figure, figcaption, footer {
   margin: 0;
   padding: 0;
 }
@@ -70,6 +80,7 @@ html {
 body {
   color: var(--bg-color-dark-primary);
   font-family: Inter,"Noto Sans JP",sans-serif;
+    /* font-family: "Zen Old Mincho", serif; */
   font-size: var(--font-size-initial);
   line-height: 1.6;
   letter-spacing: .1em;
@@ -83,22 +94,6 @@ ol, ul {
   list-style: none;
 }
 
-.stack > * {
-  margin-block: 0;
+a, a:active, a:hover {
+  text-decoration: none;
 }
-.stack:only-child {
-  block-size: 100%;
-}
-.stack > * + * {
-  margin-block-start: var(--space-initial);
-}
-.stack.exception-small > * + * {
-  margin-block-start: var(--space-small);
-}
-.stack-child-exception-large, .stack-child-exception-large + * {
-  --space: var(--space-large);
-}
-.stack.recursion * + * {
-  margin-block-start: var(--space-initial);
-}
-
