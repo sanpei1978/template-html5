@@ -20,8 +20,14 @@
 .stack > * + * {
   margin-block-start: var(--space-initial);
 }
+.stack.exception-smaller > * + * {
+  margin-block-start: var(--space-smaller);
+}
 .stack.exception-small > * + * {
   margin-block-start: var(--space-small);
+}
+.stack.exception-larger > * + * {
+  margin-block-start: var(--space-larger);
 }
 .stack.exception-large > * + * {
   margin-block-start: var(--space-large);
@@ -32,13 +38,9 @@
 .stack.exception-xx-large > * + * {
   margin-block-start: var(--space-xx-large);
 }
-.stack-child-exception-large, .stack-child-exception-large + * {
-  --space-initial: var(--space-large);
+.stack.exception-xxx-large > * + * {
+  margin-block-start: var(--space-xxx-large);
 }
-.stack.recursion * + * {
-  margin-block-start: var(--space-initial);
-}
-
 
 .cluster {
   display: flex;
@@ -53,9 +55,16 @@
 .cluster.justify-space-between {
   justify-content: space-between;
 }
+.cluster.justify-end {
+  justify-content: end;
+}
 .cluster.align-center {
   align-items: center;
 }
+.cluster.gap-small {
+  gap: var(--space-small);
+}
+  
 
 
 .switcher {

@@ -12,7 +12,11 @@
 
   --header-height: 72px;
   
-  --content-width-default: 864px;
+  --z-index-level-0: 0;
+  --z-index-level-high-first: 1;
+  --z-index-level-high-second: 2;
+
+  --content-width-default: 980px;
   --content-width-large: 2560px;
 
   --content-sides-space-default: 40px;
@@ -35,29 +39,40 @@
   --sentence-space-initial: 0.5rem;
   --sentence-space-large: calc(var(--sentence-space-initial) * 3);
 
-  --font-size-ratio: 1.5;
-  --font-size-xx-small: calc(var(--font-size-x-small) / var(--font-size-ratio));
-  --font-size-x-small: calc(var(--font-size-small) / var(--font-size-ratio));
-  --font-size-small: calc(var(--font-size-smaller) / var(--font-size-ratio));
-  --font-size-smaller: calc(var(--font-size-initial) / var(--font-size-ratio));
+  --font-size-ratio-smaller: 1.1;
+  --font-size-ratio-larger: 1.5;
+  --font-size-xx-small: calc(var(--font-size-x-small) / var(--font-size-ratio-smaller));
+  --font-size-x-small: calc(var(--font-size-small) / var(--font-size-ratio-smaller));
+  --font-size-small: calc(var(--font-size-smaller) / var(--font-size-ratio-smaller));
+  --font-size-smaller: calc(var(--font-size-initial) / var(--font-size-ratio-smaller));
   --font-size-initial: 16px;
-  --font-size-larger: calc(var(--font-size-initial) * var(--font-size-ratio));
-  --font-size-large: calc(var(--font-size-larger) * var(--font-size-ratio));
-  --font-size-x-large: calc(var(--font-size-large) * var(--font-size-ratio));
-  --font-size-xx-large: calc(var(--font-size-x-large) * var(--font-size-ratio));
+  --font-size-larger: calc(var(--font-size-initial) * var(--font-size-ratio-larger));
+  --font-size-large: calc(var(--font-size-larger) * var(--font-size-ratio-larger));
+  --font-size-x-large: calc(var(--font-size-large) * var(--font-size-ratio-larger));
+  --font-size-xx-large: calc(var(--font-size-x-large) * var(--font-size-ratio-larger));
+
+  --font-weight-initial: 400;
+  --font-weight-bolder: 500;
+  --font-weight-bold: 700;
 }
 
 @media screen and (max-width: 767px) {
   :root {
     --content-sides-space-default: 20px;
-    --font-size-default: 14px;
+    --font-size-initial: 14px;
   }
-  #menu_secondary {
+  #nav_toggle {
     display: block;
+  }
+  header.cluster {
+    justify-content: flex-end;
+  }
+  #menu_primary {
+    display: none;
   }
 }
 @media screen and (min-width: 768px) {
-  #menu_secondary {
+  #nav_toggle {
     display: none;
   }
 }
@@ -86,6 +101,17 @@ body {
   letter-spacing: .1em;
 }
 
+/* コンテンツ高さが小さくてもfooterを最下部に表示させるための処理 */
+html, body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* 縦に並べる */
+}
+main {
+  flex: 1; /* メインコンテンツが残りのスペースを占める */
+}
+/****/
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: unset;
 }
@@ -94,6 +120,45 @@ ol, ul {
   list-style: none;
 }
 
-a, a:active, a:hover {
+a {
+  background-color: transparent;
+  color: var(--text-color-dark-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+a:active, a:hover {
+  outline: 0;
+  color: var(--text-color-dark-secondary);
   text-decoration: none;
 }
+a:focus, *:focus {
+  outline: none;
+}
+a[href^="tel:"]:hover img {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.fade-in.slow {
+  animation: fadeIn 2s;
+  animation-fill-mode: both;
+}
+.fade-in.fast {
+  animation: fadeIn 1s;
+  animation-fill-mode: both;
+}
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; display: none; }
+}.fade-out.slow {
+  animation: fadeOut 2s;
+  animation-fill-mode: both;
+}
+.fade-out.fast {
+  animation: fadeOut 1s;
+  animation-fill-mode: both;
+}
+

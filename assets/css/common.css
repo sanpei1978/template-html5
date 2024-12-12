@@ -1,7 +1,24 @@
 header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 9999;
-    height: var(--header-height);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: var(--z-index-level-high-first);
+  height: var(--header-height);
+  background-color: var(--bg-color-light-primary);
+}
+
+main {
+  margin-top: var(--header-height);
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+}
+
+.out-of-view {
+  text-indent: -9999px;
+  overflow: hidden;
+  height: 0;
 }
